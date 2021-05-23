@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnBuscar.setOnClickListener {
+            atualizarEndereco()
+        }
     }
 
     fun atualizarEndereco() {
@@ -29,18 +32,20 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://viacep.com.br")
+                .baseUrl("https://viacep.com.br/ws/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(http)
+                .client (http)
                 .build()
 
         val service = retrofit.create(CepService::class.java)
+
+        val call = service.get(binding.editTextCep.text.toString())
 
         val callback = object  : Callback<Local>{
             override fun onResponse(call: Call<Local>, response: Response<Local>) {
                 if (response.isSuccessful) {
                     val local = response.body()
-//                    atualizarTela(local)
+                    atualizarTela(local)
                 } else {
                     Snackbar.make(
                             binding.root,
@@ -62,7 +67,25 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-//        service.get()
+
+        call.enqueue(callback)
+
+    }
+
+    fun atualizarTela (endereco: Local?){
+        val msg = """Logradouro: ${endereco?.logradouro}
+                |Bairro: ${endereco?.bairro}
+                |Complemento: ${endereco?.complemento}
+                |Cidade: ${endereco?.localidade}
+                |Estado: ${endereco?.uf}
+                |CEP: ${endereco?.cep}
+                |ddd: ${endereco?.ddd}
+                |gia: ${endereco?.gia}
+                |ibge: ${endereco?.ibge}
+                |siafi: ${endereco?.siafi}
+                 """.trimMargin()
+
+        binding.txtMsg.text = msg
     }
 
 }

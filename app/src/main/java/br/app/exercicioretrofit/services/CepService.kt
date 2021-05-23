@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CepService {
-    @GET("/ws/{cep}/json/")
-    fun get(@Path("cep") id: String): Call<List<Local>>
+    @GET("{CEP}/json/")
+    fun get(@Path("CEP") id: String): Call<Local>
 }
