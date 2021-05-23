@@ -1,6 +1,6 @@
-package br.app.exercicioretrofit.services
+package br.app.main.exercicioretrofit.services
 
-import br.app.exercicioretrofit.model.Local
+import br.app.main.exercicioretrofit.model.Local
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

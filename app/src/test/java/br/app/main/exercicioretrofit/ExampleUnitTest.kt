@@ -1,4 +1,4 @@
-package br.app.exercicioretrofit
+package br.app.main.exercicioretrofit
 
 import org.junit.Test
 

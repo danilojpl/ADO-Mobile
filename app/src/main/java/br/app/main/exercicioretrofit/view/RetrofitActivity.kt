@@ -1,11 +1,11 @@
-package br.app.exercicioretrofit.view
+package br.app.main.exercicioretrofit.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import br.app.exercicioretrofit.databinding.ActivityMainBinding
-import br.app.exercicioretrofit.model.Local
-import br.app.exercicioretrofit.services.CepService
+import br.app.main.databinding.ActivityRetrofitBinding
+import br.app.main.exercicioretrofit.model.Local
+import br.app.main.exercicioretrofit.services.CepService
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -14,11 +14,11 @@ import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+class RetrofitActivity : AppCompatActivity() {
+    lateinit var binding: ActivityRetrofitBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRetrofitBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnBuscar.setOnClickListener {
             atualizarEndereco()

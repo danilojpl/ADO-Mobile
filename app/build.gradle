@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "br.app.exercicioretrofit"
+        applicationId "br.app.main"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

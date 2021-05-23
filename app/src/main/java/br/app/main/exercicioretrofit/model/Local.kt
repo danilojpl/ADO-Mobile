@@ -1,4 +1,4 @@
-package br.app.exercicioretrofit.model
+package br.app.main.exercicioretrofit.model
 
 data class Local(
     var cep: String,
