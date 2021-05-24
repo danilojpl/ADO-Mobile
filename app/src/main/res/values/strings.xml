@@ -16,4 +16,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Config -->
+    <string name="room_db">room_database</string>
+    <string name="shared_users">shared_users</string>
+    <string name="shared_username">shared_username</string>
+    <string name="shared_color">note_color</string>
 </resources>
