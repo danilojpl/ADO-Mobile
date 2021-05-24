@@ -16,6 +16,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#FFFFFF"
         app:srcCompat="@drawable/add" />
 
     <ScrollView

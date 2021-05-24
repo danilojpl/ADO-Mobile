@@ -17,11 +17,20 @@ class NewNoteActivity : AppCompatActivity() {
         binding = ActivityNewNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val note = intent.getSerializableExtra("note") as? Note
+
+        note?.let {
+            binding.etTitle.setText(note.title)
+            binding.etDesc.setText(note.desc)
+            binding.btnAdd.text = "Atualizar"
+        }
+
         binding.btnAdd.setOnClickListener {
             val sharedPrefs = getSharedPreferences(getString(R.string.shared_users), Context.MODE_PRIVATE)
             val user = sharedPrefs.getString(getString(R.string.shared_username), "") as String
 
             val note = Note(
+                id = note?.id,
                 title = binding.etTitle.text.toString(),
                 desc = binding.etDesc.text.toString(),
                 user = user

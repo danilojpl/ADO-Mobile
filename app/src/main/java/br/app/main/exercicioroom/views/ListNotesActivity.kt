@@ -24,10 +24,6 @@ class ListNotesActivity : AppCompatActivity() {
         binding.addButton.setOnClickListener {
             startActivity(Intent(this, NewNoteActivity::class.java))
         }
-//
-//        addItem("Titulo 1", "Descrição 1")
-//        addItem("Titulo 2", "Descrição 2")
-//        addItem("Titulo 3", "Descrição 3")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,36 +46,59 @@ class ListNotesActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        refreshNotes()
+    }
 
-        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
-        val color = prefManager.getInt(getString(R.string.shared_color), R.color.noteDefaultColor)
-
+    fun refreshNotes () {
         Thread {
             val db = Room.databaseBuilder(this, AppDB::class.java, getString(R.string.room_db)).build()
             val notes = db.noteDAO().getAll()
 
             runOnUiThread {
-                binding.container.removeAllViews()
-    
-                notes.forEach {
-                    val nota = NotaBinding.inflate(layoutInflater)
-
-                    nota.txtTitulo.text = it.title
-                    nota.txtDesc.text = it.desc
-                    nota.txtAutor.text = it.user
-                    nota.container.setBackgroundColor(color)
-
-                    binding.container.addView(nota.root)
-                }
+                updateUI(notes)
             }
         }.start()
     }
-//
-//    fun addItem(textoDoTitulo: String, textoDoConteudo: String) {
-//        val nota = NotaBinding.inflate(layoutInflater)
-//
-//        nota.txtTitulo.text = textoDoTitulo
-//        nota.txtDesc.text = textoDoConteudo
-//        binding.container.addView(nota.root)
-//    }
+
+    fun removeNote (note: Note) {
+        Thread {
+            val db = Room.databaseBuilder(this, AppDB::class.java, getString(R.string.room_db)).build()
+            db.noteDAO().remove(note)
+
+            refreshNotes()
+        }.start()
+    }
+
+    fun updateNote (note: Note) {
+        val intent = Intent(this, NewNoteActivity::class.java)
+        intent.putExtra("note", note)
+        startActivity(intent)
+    }
+
+    fun updateUI (notes: List<Note>) {
+        val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val color = prefManager.getInt(getString(R.string.shared_color), R.color.noteDefaultColor)
+
+        binding.container.removeAllViews()
+
+        notes.forEach {
+            val nota = NotaBinding.inflate(layoutInflater)
+            val note = it
+
+            nota.txtTitulo.text = note.title
+            nota.txtDesc.text = note.desc
+            nota.txtAutor.text = note.user
+            nota.container.setBackgroundColor(color)
+
+            nota.remove.setOnClickListener {
+                removeNote(note)
+            }
+
+            nota.container.setOnClickListener {
+                updateNote(note)
+            }
+
+            binding.container.addView(nota.root)
+        }
+    }
 }
