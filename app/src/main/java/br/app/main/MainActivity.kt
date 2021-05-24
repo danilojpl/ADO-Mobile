@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.app.main.databinding.ActivityMainBinding
 import br.app.main.exercicioretrofit.view.RetrofitActivity
+import br.app.main.exercicioroom.views.ListNotesActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnRetrofit.setOnClickListener {
             this.startActivity(Intent(this, RetrofitActivity::class.java))
+        }
+
+        binding.btnRoom.setOnClickListener {
+            this.startActivity(Intent(this, ListNotesActivity::class.java))
         }
     }
 }
