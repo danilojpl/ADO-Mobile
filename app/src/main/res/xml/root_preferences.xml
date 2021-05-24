@@ -9,5 +9,25 @@
             android:title="Cor padrão das notas">
 
         </com.jaredrummler.android.colorpicker.ColorPreferenceCompat>
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/noteTextDefaultColor"
+            android:key="@string/font_color"
+            android:summary="Selecione uma cor"
+            android:title="Cor do texto nas notas">
+        </com.jaredrummler.android.colorpicker.ColorPreferenceCompat>
+
+        <EditTextPreference
+            app:key="@string/title_size"
+            app:title="Tamanho do título"
+            android:defaultValue="24"
+             />
+
+        <EditTextPreference
+            app:key="@string/desc_size"
+            app:title="Tamanho da descrição"
+            android:defaultValue="14"
+            />
+
     </PreferenceCategory>
 </PreferenceScreen>

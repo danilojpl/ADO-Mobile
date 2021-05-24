@@ -77,7 +77,12 @@ class ListNotesActivity : AppCompatActivity() {
 
     fun updateUI (notes: List<Note>) {
         val prefManager = PreferenceManager.getDefaultSharedPreferences(this)
+
         val color = prefManager.getInt(getString(R.string.shared_color), R.color.noteDefaultColor)
+        val fontColor = prefManager.getInt(getString(R.string.font_color), R.color.noteTextDefaultColor)
+
+        val titleSize = prefManager.getString(getString(R.string.title_size), getString(R.string.title_default_size)) as String
+        val descSize = prefManager.getString(getString(R.string.desc_size), getString(R.string.desc_default_size)) as String
 
         binding.container.removeAllViews()
 
@@ -86,8 +91,16 @@ class ListNotesActivity : AppCompatActivity() {
             val note = it
 
             nota.txtTitulo.text = note.title
+            nota.txtTitulo.textSize = titleSize.toFloat()
+            nota.txtTitulo.setTextColor(fontColor)
+
             nota.txtDesc.text = note.desc
+            nota.txtDesc.textSize = descSize.toFloat()
+            nota.txtDesc.setTextColor(fontColor)
+
             nota.txtAutor.text = note.user
+            nota.txtAutor.setTextColor(fontColor)
+
             nota.container.setBackgroundColor(color)
 
             nota.remove.setOnClickListener {
