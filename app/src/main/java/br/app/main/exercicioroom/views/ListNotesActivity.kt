@@ -101,7 +101,7 @@ class ListNotesActivity : AppCompatActivity() {
             nota.txtAutor.text = note.user
             nota.txtAutor.setTextColor(fontColor)
 
-            nota.container.setBackgroundColor(color)
+            nota.container.setBackgroundColor(note.color)
 
             nota.remove.setOnClickListener {
                 removeNote(note)

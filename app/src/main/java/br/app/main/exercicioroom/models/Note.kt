@@ -1,5 +1,6 @@
 package br.app.main.exercicioroom.models
 
+import android.app.Activity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
@@ -15,5 +16,7 @@ data class Note(
     var desc: String,
 
     @ColumnInfo(defaultValue = "Desconhecido")
-    var user: String
+    var user: String,
+
+    var color: Int
 ) : Serializable
